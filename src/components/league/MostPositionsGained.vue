@@ -43,6 +43,8 @@ watch(
 
 <template>
   <div v-if="mostPositionsGainedPlayer">
-    ⬆️ {{ mostPositionsGainedPlayer.entry_name }} {{ mostPositionsGainedPlayer.total }}
+    ⬆️ {{ mostPositionsGainedPlayer.entry_name }} +{{
+      calculatePositionsGained(mostPositionsGainedPlayer)
+    }}
   </div>
 </template>
