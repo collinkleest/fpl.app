@@ -30,5 +30,7 @@ watch(
 </script>
 
 <template>
-  <div v-if="pendingChampion">🏆 {{ pendingChampion.entry_name }} {{ pendingChampion.total }}</div>
+  <div v-if="pendingChampion">
+    🏆 {{ pendingChampion.entry_name }} {{ pendingChampion.total }} pts
+  </div>
 </template>

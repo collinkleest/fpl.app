@@ -39,6 +39,6 @@ watch(
 
 <template>
   <div v-if="topPlayerOfTheWeek">
-    🔥 {{ topPlayerOfTheWeek.entry_name }} {{ topPlayerOfTheWeek.total }}
+    🔥 {{ topPlayerOfTheWeek.entry_name }} {{ topPlayerOfTheWeek.event_total }} pts
   </div>
 </template>

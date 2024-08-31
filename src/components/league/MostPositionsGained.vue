@@ -46,5 +46,6 @@ watch(
     ⬆️ {{ mostPositionsGainedPlayer.entry_name }} +{{
       calculatePositionsGained(mostPositionsGainedPlayer)
     }}
+    positions
   </div>
 </template>
