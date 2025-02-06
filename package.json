@@ -7,12 +7,10 @@
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
-    "test:unit": "vitest",
     "build-only": "vite build",
     "type-check": "vue-tsc --build --force",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
-    "format": "prettier --write src/",
-    "lint:test": "pnpm lint && pnpm test:unit"
+    "format": "prettier --write src/"
   },
   "dependencies": {
     "pinia": "^2.3.1",
