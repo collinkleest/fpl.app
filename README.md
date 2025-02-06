@@ -39,3 +39,9 @@ pnpm test:unit
 ```sh
 pnpm lint
 ```
+
+### Dependency Management
+Update deps to latest version
+```bash
+pnpm up --latest
+```
