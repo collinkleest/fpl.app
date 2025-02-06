@@ -5,13 +5,12 @@ table {
   border-spacing: 0; /* Removes extra spacing */
 }
 
-th, td {
+th,
+td {
   padding: 10px;
   text-align: left;
   border: 1px solid var(--vt-c-text-dark-2); /* Subtle line between rows */
 }
-
-
 </style>
 
 <script setup lang="ts">
@@ -38,11 +37,17 @@ const results = computed(() => ramsStore.leagueData?.standings?.results || [])
       <tr v-for="(player, index) in results" v-bind:key="player.id">
         <td>{{ player.rank }}</td>
         <td>{{ player.entry_name }}</td>
-        <td>{{ player.player_name.toLowerCase() == "vincent delisi" ? "Vincent Wanker DeLisi" : player.player_name }}</td>
+        <td>
+          {{
+            player.player_name.toLowerCase() == 'vincent delisi'
+              ? 'Vincent Wanker DeLisi'
+              : player.player_name
+          }}
+        </td>
         <td>{{ player.event_total }}</td>
         <td>{{ player.total }}</td>
-        <td>{{ index === 0 ? 0 : results[index - 1]?.total - player.total}}</td>
-        <td>{{ index === 0 ? 0 : results[0]?.total - player.total}}</td>
+        <td>{{ index === 0 ? 0 : results[index - 1]?.total - player.total }}</td>
+        <td>{{ index === 0 ? 0 : results[0]?.total - player.total }}</td>
       </tr>
     </tbody>
   </table>
