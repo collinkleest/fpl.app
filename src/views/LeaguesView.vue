@@ -6,7 +6,8 @@ import {
   TopPlayer,
   MostPositionsGained,
   PendingChampion,
-  LeagueTable
+  LeagueTable,
+  LiveLeagueTable
 } from '@/components'
 
 const ramsStore = useRamsStore()
@@ -14,6 +15,10 @@ const ramsStore = useRamsStore()
 onMounted(() => {
   if (!ramsStore.leagueData) {
     ramsStore.fetchLeague()
+  }
+
+  if (!ramsStore.liveLeagueData) {
+    ramsStore.fetchLiveTable()
   }
 })
 </script>
@@ -28,5 +33,11 @@ onMounted(() => {
     <MostPositionsGained />
     <PendingChampion />
     <LeagueTable />
+  </div>
+
+  <div v-if="ramsStore.loadingLive">Loading Live Table...</div>
+  <div v-else-if="ramsStore.liveError">{{ ramsStore.liveError }}</div>
+  <div v-else>
+    <LiveLeagueTable />
   </div>
 </template>

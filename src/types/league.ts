@@ -44,3 +44,38 @@ export interface StandingsResponse {
   league: League
   standings: Standings
 }
+
+export interface Pick {
+  element: number
+  position: number
+  multiplier: number
+  is_captain: boolean
+  is_vice_captain: boolean
+  element_type: number
+}
+
+export interface PicksResponse {
+  active_chip: string
+  automatic_subs: string[]
+  picks: Pick[]
+}
+
+export interface LiveStats {
+  total_points: number
+}
+
+export interface LiveElement {
+  id: number
+  stats: LiveStats
+}
+
+export interface LiveResponse {
+  elements: LiveElement[]
+}
+
+export interface LiveData {
+  totalPoints: number
+  entryName: string
+  playerName: string
+  rank: number
+}
