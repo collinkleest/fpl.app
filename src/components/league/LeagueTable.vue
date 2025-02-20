@@ -19,12 +19,16 @@ import { computed } from 'vue'
 import DataTable from 'primevue/datatable'
 import Column from 'primevue/column'
 import type { Result } from '@/types'
+import { findTopPlayerOfTheWeek } from '@/utils'
 
 const mapTableData = (results: Result[] | undefined) => {
+  const topPlayer = findTopPlayerOfTheWeek(results)
+  console.log(topPlayer)
   return results?.map((result, index, resultsArray) => {
+    const entryName = result == topPlayer ? `🔥 ${result.entry_name}` : result.entry_name
     return {
       rank: result.rank,
-      entryName: result.entry_name,
+      entryName,
       playerName: result.player_name,
       gameweekTotal: result.event_total,
       totalPoints: result.total,
