@@ -16,39 +16,37 @@ td {
 <script setup lang="ts">
 import { useRamsStore } from '@/stores/rams'
 import { computed } from 'vue'
+import DataTable from 'primevue/datatable'
+import Column from 'primevue/column'
+import type { Result } from '@/types'
+
+const mapTableData = (results: Result[] | undefined) => {
+  return results?.map((result, index, resultsArray) => {
+    return {
+      rank: result.rank,
+      entryName: result.entry_name,
+      playerName: result.player_name,
+      gameweekTotal: result.event_total,
+      totalPoints: result.total,
+      pointsTillLeapfrog: resultsArray[index - 1]?.total - result.total,
+      pointsTillTop: results[0]?.total - result.total
+    }
+  })
+}
+
 const ramsStore = useRamsStore()
-const results = computed(() => ramsStore.leagueData?.standings?.results || [])
+const tableData = computed(() => mapTableData(ramsStore.leagueData?.standings?.results) || [])
 </script>
 
 <template>
-  <table v-if="ramsStore.leagueData">
-    <thead>
-      <tr>
-        <th>Rank</th>
-        <th>Team Name</th>
-        <th>Player Name</th>
-        <th>GW Points</th>
-        <th>Total Points</th>
-        <th>Points till 🐸</th>
-        <th>Points till 🔝</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="(player, index) in results" v-bind:key="player.id">
-        <td>{{ player.rank }}</td>
-        <td>{{ player.entry_name }}</td>
-        <td>
-          {{
-            player.player_name.toLowerCase() == 'vincent delisi'
-              ? 'Vincent Wanker DeLisi'
-              : player.player_name
-          }}
-        </td>
-        <td>{{ player.event_total }}</td>
-        <td>{{ player.total }}</td>
-        <td>{{ index === 0 ? 0 : results[index - 1]?.total - player.total }}</td>
-        <td>{{ index === 0 ? 0 : results[0]?.total - player.total }}</td>
-      </tr>
-    </tbody>
-  </table>
+  <DataTable v-if="ramsStore.leagueData">
+    <DataTable :value="tableData" tableStyle="min-width: 50rem">
+      <Column field="rank" header="Rank"></Column>
+      <Column field="entryName" header="Entry Name"></Column>
+      <Column field="gameweekTotal" header="GW Total"></Column>
+      <Column field="totalPoints" header="Total Points"></Column>
+      <Column field="pointsTillLeapfrog" header="Points till 🐸"></Column>
+      <Column field="pointsTillTop" header="Points till 🔝"></Column>
+    </DataTable>
+  </DataTable>
 </template>
