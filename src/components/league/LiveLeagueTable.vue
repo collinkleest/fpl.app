@@ -38,9 +38,7 @@ const liveLeagueDataResults = computed(() => ramsStore.liveLeagueData || [])
         <td>{{ player.rank }}</td>
         <td>{{ player.entryName }}</td>
         <td>
-          {{
-            player.playerName
-          }}
+          {{ player.playerName }}
         </td>
         <td>{{ player.event_total }}</td>
         <td>{{ player.total }}</td>

@@ -76,7 +76,7 @@ export const useRamsStore = defineStore('ramsStore', () => {
           event_total +=
             gameWeekLiveDataElements[pick.element - 1].stats.total_points * pick.multiplier
         }
-        const total = prev_total + event_total;
+        const total = prev_total + event_total
 
         tableData.push({
           event_total,
@@ -94,5 +94,14 @@ export const useRamsStore = defineStore('ramsStore', () => {
     }
   }
 
-  return { leagueData, loading, error, fetchLeague, fetchLiveTable, liveLeagueData, liveError, loadingLive }
+  return {
+    leagueData,
+    loading,
+    error,
+    fetchLeague,
+    fetchLiveTable,
+    liveLeagueData,
+    liveError,
+    loadingLive
+  }
 })

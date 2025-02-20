@@ -5,4 +5,11 @@ import PendingChampion from './PendingChampion.vue'
 import TopPlayer from './TopPlayer.vue'
 import LiveLeagueTable from './LiveLeagueTable.vue'
 
-export { LeagueLegend, LeagueTable, MostPositionsGained, PendingChampion, TopPlayer, LiveLeagueTable }
+export {
+  LeagueLegend,
+  LeagueTable,
+  MostPositionsGained,
+  PendingChampion,
+  TopPlayer,
+  LiveLeagueTable
+}
