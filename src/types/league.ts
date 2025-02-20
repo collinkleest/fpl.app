@@ -74,8 +74,9 @@ export interface LiveResponse {
 }
 
 export interface LiveData {
-  totalPoints: number
+  event_total: number
   entryName: string
   playerName: string
   rank: number
+  total: number
 }

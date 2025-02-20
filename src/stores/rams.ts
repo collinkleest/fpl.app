@@ -61,31 +61,29 @@ export const useRamsStore = defineStore('ramsStore', () => {
       const currentGameweek = await getCurrentGameweek(results[0].entry)
       const gameWeekLiveDataElements = (await getGameweekLiveData(currentGameweek)).elements
 
-      const tableData: {
-        totalPoints: number
-        entryName: string
-        playerName: string
-        rank: number
-      }[] = []
+      const tableData: LiveData[] = []
 
       for (const result of results) {
-        await sleep(500) // Ensures requests happen sequentially with a delay
+        const prev_total = result.total - result.event_total
+        await sleep(200)
         const picksResponse: PicksResponse = await getPicksResponse(result.entry, currentGameweek)
         const entryName = result.entry_name
         const playerName = result.player_name
         const rank = result.rank
 
-        let totalPoints = 0
+        let event_total = 0
         for (const pick of picksResponse.picks) {
-          totalPoints +=
+          event_total +=
             gameWeekLiveDataElements[pick.element - 1].stats.total_points * pick.multiplier
         }
+        const total = prev_total + event_total;
 
         tableData.push({
-          totalPoints,
+          event_total,
           entryName,
           playerName,
-          rank
+          rank,
+          total
         })
       }
       liveLeagueData.value = tableData

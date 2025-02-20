@@ -22,16 +22,15 @@ const liveLeagueDataResults = computed(() => ramsStore.liveLeagueData || [])
 
 <template>
   <table v-if="ramsStore.liveLeagueData">
-    <h3>Live Rams Table</h3>
     <thead>
       <tr>
         <th>Rank</th>
         <th>Team Name</th>
         <th>Player Name</th>
         <th>GW Points</th>
-        <!-- <th>Total Points</th>
+        <th>Total Points</th>
         <th>Points till 🐸</th>
-        <th>Points till 🔝</th> -->
+        <th>Points till 🔝</th>
       </tr>
     </thead>
     <tbody>
@@ -43,10 +42,10 @@ const liveLeagueDataResults = computed(() => ramsStore.liveLeagueData || [])
             player.playerName
           }}
         </td>
-        <td>{{ player.totalPoints }}</td>
-        <!-- <td>{{ player.total }}</td> -->
-        <!-- <td>{{ index === 0 ? 0 : results[index - 1]?.total - player.total }}</td> -->
-        <!-- <td>{{ index === 0 ? 0 : results[0]?.total - player.total }}</td> -->
+        <td>{{ player.event_total }}</td>
+        <td>{{ player.total }}</td>
+        <td>{{ index === 0 ? 0 : liveLeagueDataResults[index - 1]?.total - player.total }}</td>
+        <td>{{ index === 0 ? 0 : liveLeagueDataResults[0]?.total - player.total }}</td>
       </tr>
     </tbody>
   </table>
