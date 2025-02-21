@@ -1,26 +1,25 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRamsStore } from '@/stores/rams'
-import {
-  LeagueLegend,
-  TopPlayer,
-  MostPositionsGained,
-  PendingChampion,
-  LeagueTable,
-  LiveLeagueTable
-} from '@/components'
+import { LeagueLegend, LeagueTable, LiveLeagueTable } from '@/components'
+import Button from 'primevue/button'
+import ProgressBar from 'primevue/progressbar'
 
 const ramsStore = useRamsStore()
+const showLiveTable = ref<boolean>(false)
 
 onMounted(() => {
   if (!ramsStore.leagueData) {
     ramsStore.fetchLeague()
   }
+})
 
+const toggleLiveTable = () => {
+  showLiveTable.value = true
   if (!ramsStore.liveLeagueData) {
     ramsStore.fetchLiveTable()
   }
-})
+}
 </script>
 
 <template>
@@ -33,9 +32,14 @@ onMounted(() => {
   </div>
 
   <h2>Live Rams Table Table</h2>
-  <div v-if="ramsStore.loadingLive">Loading Live Table...</div>
-  <div v-else-if="ramsStore.liveError">{{ ramsStore.liveError }}</div>
-  <div v-else>
-    <LiveLeagueTable />
+  <Button v-if="!showLiveTable" label="Load Live Table" @click="toggleLiveTable" />
+  <div v-if="showLiveTable">
+    <div v-if="ramsStore.loadingLive">
+      <ProgressBar :value="ramsStore.liveProgress"></ProgressBar>
+    </div>
+    <div v-else-if="ramsStore.liveError">{{ ramsStore.liveError }}</div>
+    <div v-else>
+      <LiveLeagueTable />
+    </div>
   </div>
 </template>

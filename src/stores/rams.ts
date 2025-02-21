@@ -68,7 +68,7 @@ export const useRamsStore = defineStore('ramsStore', () => {
         const prev_total = result.total - result.event_total
         await sleep(200)
         const picksResponse: PicksResponse = await getPicksResponse(result.entry, currentGameweek)
-        liveProgress.value = (index + 1 / totalResultsLength) * 100
+        liveProgress.value = Math.ceil(((index + 1) / totalResultsLength) * 100)
         const entryName = result.entry_name
         const playerName = result.player_name
         const rank = result.rank
