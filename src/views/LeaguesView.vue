@@ -31,7 +31,7 @@ const toggleLiveTable = () => {
     <LeagueTable />
   </div>
 
-  <h2>Live Rams Table Table</h2>
+  <h2>Live Rams Table</h2>
   <Button v-if="!showLiveTable" label="Load Live Table" @click="toggleLiveTable" />
   <div v-if="showLiveTable">
     <div v-if="ramsStore.loadingLive">
