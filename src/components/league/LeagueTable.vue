@@ -23,7 +23,6 @@ import { findTopPlayerOfTheWeek } from '@/utils'
 
 const mapTableData = (results: Result[] | undefined) => {
   const topPlayer = findTopPlayerOfTheWeek(results)
-  console.log(topPlayer)
   return results?.map((result, index, resultsArray) => {
     const entryName = result == topPlayer ? `🔥 ${result.entry_name}` : result.entry_name
     return {
