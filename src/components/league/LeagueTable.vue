@@ -37,8 +37,8 @@ const mapTableData = (results: Result[] | undefined) => {
       playerName: result.player_name,
       gameweekTotal: result.event_total,
       totalPoints: result.total,
-      pointsTillLeapfrog: resultsArray[index - 1]?.total - result.total,
-      pointsTillTop: results[0]?.total - result.total
+      pointsTillLeapfrog: index == 0 ? 0 : resultsArray[index - 1]?.total - result.total,
+      pointsTillTop: index === 0 ? 0 : results[0]?.total - result.total
     }
   })
 }
@@ -51,7 +51,7 @@ const tableData = computed(() => mapTableData(ramsStore.leagueData?.standings?.r
   <DataTable v-if="ramsStore.leagueData">
     <DataTable :value="tableData" tableStyle="min-width: 50rem">
       <Column field="rank" header="Rank"></Column>
-      <Column field="entryName" header="Entry Name"></Column>
+      <Column field="entryName" header="Team Name"></Column>
       <Column field="gameweekTotal" header="GW Total"></Column>
       <Column field="totalPoints" header="Total Points"></Column>
       <Column field="pointsTillLeapfrog" header="Points till 🐸"></Column>
