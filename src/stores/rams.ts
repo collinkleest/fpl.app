@@ -10,6 +10,7 @@ export const useRamsStore = defineStore('ramsStore', () => {
   const error = ref(null)
   const loadingLive = ref(false)
   const liveError = ref(null)
+  const liveProgress = ref<number>(0)
 
   const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
 
@@ -62,11 +63,12 @@ export const useRamsStore = defineStore('ramsStore', () => {
       const gameWeekLiveDataElements = (await getGameweekLiveData(currentGameweek)).elements
 
       const tableData: LiveData[] = []
-
-      for (const result of results) {
+      const totalResultsLength = results.length
+      for (const [index, result] of results.entries()) {
         const prev_total = result.total - result.event_total
         await sleep(200)
         const picksResponse: PicksResponse = await getPicksResponse(result.entry, currentGameweek)
+        liveProgress.value = (index + 1 / totalResultsLength) * 100
         const entryName = result.entry_name
         const playerName = result.player_name
         const rank = result.rank
@@ -102,6 +104,7 @@ export const useRamsStore = defineStore('ramsStore', () => {
     fetchLiveTable,
     liveLeagueData,
     liveError,
-    loadingLive
+    loadingLive,
+    liveProgress
   }
 })
