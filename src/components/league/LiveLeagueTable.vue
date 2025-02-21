@@ -16,35 +16,34 @@ td {
 <script setup lang="ts">
 import { useRamsStore } from '@/stores/rams'
 import { computed } from 'vue'
+import DataTable from 'primevue/datatable'
+import Column from 'primevue/column'
+
+const mapTableData = (results: any) => {
+  return results.map((result: any, index: number, arr: any[]) => {
+    return {
+      rank: result.rank,
+      entryName: result.entryName,
+      gameweekTotal: result.event_total,
+      totalPoints: result.total,
+      pointsTillLeapfrog: index == 0 ? 0 : arr[index - 1]?.total - result.total,
+      pointsTillTop: index === 0 ? 0 : results[0]?.total - result.total
+    }
+  })
+}
 const ramsStore = useRamsStore()
-const liveLeagueDataResults = computed(() => ramsStore.liveLeagueData || [])
+const tableData = computed(() => mapTableData(ramsStore.liveLeagueData) || [])
 </script>
 
 <template>
-  <table v-if="ramsStore.liveLeagueData">
-    <thead>
-      <tr>
-        <th>Rank</th>
-        <th>Team Name</th>
-        <th>Player Name</th>
-        <th>GW Points</th>
-        <th>Total Points</th>
-        <th>Points till 🐸</th>
-        <th>Points till 🔝</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="(player, index) in liveLeagueDataResults" v-bind:key="player.playerName">
-        <td>{{ player.rank }}</td>
-        <td>{{ player.entryName }}</td>
-        <td>
-          {{ player.playerName }}
-        </td>
-        <td>{{ player.event_total }}</td>
-        <td>{{ player.total }}</td>
-        <td>{{ index === 0 ? 0 : liveLeagueDataResults[index - 1]?.total - player.total }}</td>
-        <td>{{ index === 0 ? 0 : liveLeagueDataResults[0]?.total - player.total }}</td>
-      </tr>
-    </tbody>
-  </table>
+  <DataTable v-if="ramsStore.liveLeagueData">
+    <DataTable :value="tableData" tableStyle="min-width: 50rem">
+      <Column field="rank" header="Rank"></Column>
+      <Column field="entryName" header="Team Name"></Column>
+      <Column field="gameweekTotal" header="GW Total"></Column>
+      <Column field="totalPoints" header="Total Points"></Column>
+      <Column field="pointsTillLeapfrog" header="Points till 🐸"></Column>
+      <Column field="pointsTillTop" header="Points till 🔝"></Column>
+    </DataTable>
+  </DataTable>
 </template>
