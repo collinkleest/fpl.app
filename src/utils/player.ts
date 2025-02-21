@@ -11,3 +11,18 @@ export const findTopPlayerOfTheWeek = (results: Result[] | undefined): Result | 
   })
   return topPlayer
 }
+
+export const getEntryName = (
+  entryName: string,
+  isTopRank: boolean,
+  isTopPlayer: boolean
+): string => {
+  let modifiedEntryName = ''
+  if (isTopRank) {
+    modifiedEntryName += '🏆'
+  }
+  if (isTopPlayer) {
+    modifiedEntryName += '🔥'
+  }
+  return `${modifiedEntryName} ${entryName}`
+}
