@@ -22,7 +22,7 @@ import Column from 'primevue/column'
 const mapTableData = (results: any) => {
   return results.map((result: any, index: number, arr: any[]) => {
     return {
-      rank: result.rank,
+      rank: index + 1,
       entryName: result.entryName,
       gameweekTotal: result.event_total,
       totalPoints: result.total,

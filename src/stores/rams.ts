@@ -88,6 +88,7 @@ export const useRamsStore = defineStore('ramsStore', () => {
           total
         })
       }
+      tableData.sort((a, b) => b.total - a.total)
       liveLeagueData.value = tableData
     } catch (err: any) {
       liveError.value = err?.message
