@@ -29,9 +29,6 @@ onMounted(() => {
   <div v-if="ramsStore.loading">Loading...</div>
   <div v-else-if="ramsStore.error">{{ ramsStore.error }}</div>
   <div v-else>
-    <TopPlayer />
-    <MostPositionsGained />
-    <PendingChampion />
     <LeagueTable />
   </div>
 
