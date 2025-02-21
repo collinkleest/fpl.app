@@ -15,7 +15,8 @@ export const findTopPlayerOfTheWeek = (results: Result[] | undefined): Result | 
 export const getEntryName = (
   entryName: string,
   isTopRank: boolean,
-  isTopPlayer: boolean
+  isTopPlayer: boolean,
+  isMostPositionsGainedPlayer: boolean
 ): string => {
   let modifiedEntryName = ''
   if (isTopRank) {
@@ -24,5 +25,28 @@ export const getEntryName = (
   if (isTopPlayer) {
     modifiedEntryName += '🔥'
   }
+  if (isMostPositionsGainedPlayer) {
+    modifiedEntryName += '⬆️'
+  }
   return `${modifiedEntryName} ${entryName}`
+}
+
+const calculatePositionsGained = (player: Result): number => {
+  return player.last_rank - player.rank
+}
+
+export const findMostPositionsGainedPlayer = (
+  results: Result[] | undefined
+): Result | undefined => {
+  let mostPositionsGained: Result | undefined
+  results?.forEach((result) => {
+    if (!mostPositionsGained) {
+      mostPositionsGained = result
+    } else {
+      if (calculatePositionsGained(result) > calculatePositionsGained(mostPositionsGained)) {
+        mostPositionsGained = result
+      }
+    }
+  })
+  return mostPositionsGained
 }
