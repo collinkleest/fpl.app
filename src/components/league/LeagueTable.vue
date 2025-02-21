@@ -1,18 +1,3 @@
-<style scoped>
-table {
-  width: 100%;
-  border-collapse: collapse; /* Ensures borders are clean */
-  border-spacing: 0; /* Removes extra spacing */
-}
-
-th,
-td {
-  padding: 10px;
-  text-align: left;
-  border: 1px solid var(--vt-c-text-dark-2); /* Subtle line between rows */
-}
-</style>
-
 <script setup lang="ts">
 import { useRamsStore } from '@/stores/rams'
 import { computed } from 'vue'
