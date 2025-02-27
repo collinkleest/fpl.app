@@ -4,6 +4,7 @@ import MostPositionsGained from './MostPositionsGained.vue'
 import PendingChampion from './PendingChampion.vue'
 import TopPlayer from './TopPlayer.vue'
 import LiveLeagueTable from './LiveLeagueTable.vue'
+import Table from './Table.vue'
 
 export {
   LeagueLegend,
@@ -11,5 +12,6 @@ export {
   MostPositionsGained,
   PendingChampion,
   TopPlayer,
-  LiveLeagueTable
+  LiveLeagueTable,
+  Table
 }
