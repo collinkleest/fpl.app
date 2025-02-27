@@ -4,15 +4,23 @@ import Column from 'primevue/column'
 
 const props = defineProps(['data'])
 
+const isLastThree = (index: number, length: number): boolean => {
+  return length - 1 === index || length - 2 == index || length - 3 === index
+}
+
+const isFirstThree = (index: number): boolean => {
+  return new Set([1, 2, 3]).has(index)
+}
+
 const getRowClass = (rowData: any) => {
   const index = props.data.value.indexOf(rowData)
   const length = props.data.value.length
-  if (length - 1 === index || length - 2 == index || length - 3 === index) {
+  if (isLastThree(index, length)) {
     return 'relegation'
+  } else if (isFirstThree(index)) {
+    return 'champions-league'
   } else if (index === 0) {
     return 'champion'
-  } else if (index === 1 || index === 2 || index === 3) {
-    return 'champions-league'
   }
   return ''
 }
